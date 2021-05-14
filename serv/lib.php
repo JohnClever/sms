@@ -179,7 +179,7 @@ function contentTable($type) {
                 </tr>
             ';
         }
-    } else if ($type == 'expenses') {
+    } else if ($type == '') {
         while($results = mysqli_fetch_array($query)) {
             echo '
                 <tr>
