@@ -180,6 +180,7 @@ function contentTable($type) {
             ';
         }
     } else if ($type == 'expenses') {
+        
         while($results = mysqli_fetch_array($query)) {
             echo '
                 <tr>
@@ -358,43 +359,45 @@ function contentDetail($type, $id) {
     $query = mysqli_query($conn, $sql);
     $results = mysqli_fetch_array($query);
 
-    if($type == 'students') {
-        if(empty($results['s_motherName'] && $results['s_fatherName'])) {
-
-        } else {
-            $moName = $results['s_motherName'];
-            $faName = $results['s_fatherName'];
-        
-            $sqlM = "SELECT * FROM parents WHERE p_id=$moName";
-            $sqlF = "SELECT * FROM parents WHERE p_id=$faName";
-        
-            $queryF = mysqli_query($conn, $sqlF);
-            $queryM = mysqli_query($conn, $sqlM);
-        
-            $resultsF = mysqli_fetch_array($queryF);
-            $resultsM = mysqli_fetch_array($queryM);
-        
-        
-            $results['s_motherName'] = $resultsM['p_fName'].' '.$resultsM['p_lName'];
-            $results['s_fatherName'] = $resultsF['p_fName'].' '.$resultsF['p_lName'];
-        
-            $results['p_job'] = $resultsF['p_job'];
-
-            $sql_c = "SELECT * FROM class WHERE c_id = {$results['s_class']}";
-            $query_c = mysqli_query($conn, $sql_c);
-            $results_c = mysqli_fetch_array($query_c);
-
-            $results['s_class'] = $results_c['c_name'];
-
+    if(!empty($results)) {
+        if($type == 'students') {
+            if(empty($results['s_motherName'] && $results['s_fatherName'])) {
+    
+            } else {
+                $moName = $results['s_motherName'];
+                $faName = $results['s_fatherName'];
+            
+                $sqlM = "SELECT * FROM parents WHERE p_id=$moName";
+                $sqlF = "SELECT * FROM parents WHERE p_id=$faName";
+            
+                $queryF = mysqli_query($conn, $sqlF);
+                $queryM = mysqli_query($conn, $sqlM);
+            
+                $resultsF = mysqli_fetch_array($queryF);
+                $resultsM = mysqli_fetch_array($queryM);
+            
+            
+                $results['s_motherName'] = $resultsM['p_fName'].' '.$resultsM['p_lName'];
+                $results['s_fatherName'] = $resultsF['p_fName'].' '.$resultsF['p_lName'];
+            
+                $results['p_job'] = $resultsF['p_job'];
+    
+                $sql_c = "SELECT * FROM class WHERE c_id = {$results['s_class']}";
+                $query_c = mysqli_query($conn, $sql_c);
+                $results_c = mysqli_fetch_array($query_c);
+    
+                $results['s_class'] = $results_c['c_name'];
+    
+            }
         }
-    }
-
-    if($type == 'teachers') {
-        $sql_class = "SELECT * FROM class WHERE c_id = {$results['t_class']}";
-        $query_class = mysqli_query($conn, $sql_class);
-        $results_class = mysqli_fetch_array($query_class);
-
-        $results['t_class'] = $results_class['c_name'];
+    
+        if($type == 'teachers') {
+            $sql_class = "SELECT * FROM class WHERE c_id = {$results['t_class']}";
+            $query_class = mysqli_query($conn, $sql_class);
+            $results_class = mysqli_fetch_array($query_class);
+    
+            $results['t_class'] = $results_class['c_name'];
+        }
     }
 
     return $results;

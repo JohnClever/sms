@@ -1,4 +1,4 @@
-<?php include 'serv/lib.php';?>
+<?php include 'serv/lib.php'; error_reporting(1);?>
 <!doctype html>
 <html class="no-js" lang="">
 

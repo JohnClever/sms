@@ -127,6 +127,8 @@
                                 <h3>About Me</h3>
                             </div>
                         </div>
+                        <?php if(!empty($elem)) { ?>
+
                         <div class="single-info-details">
                             <div class="item-img">
                                 <img class="detailImg" src="img/customImg/<?php echo $elem['t_photo'];?>" alt="teacher">
@@ -199,6 +201,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php } ?>
                     </div>
                 </div>
                 <!-- Student Table Area End Here -->
