@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2019 at 11:42 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: May 15, 2021 at 05:06 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `sms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book`
+--
+
+CREATE TABLE `book` (
+  `id` int(11) NOT NULL,
+  `bk_title` int(255) NOT NULL,
+  `author` int(25) NOT NULL,
+  `publisher` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -110,6 +122,23 @@ INSERT INTO `exams` (`id`, `s_id`, `s_name`, `subjects`, `class`, `classscore`, 
 (1, '1', 'Mark Clever', 'English', '7', '30', '50', '80', '1st', 'A', 'term1', '2019', ''),
 (2, '1', 'Mark Clever', 'GHANAIAN LANGUAGE', '7', '30', '45', '75', '3rd', 'B+', 'term1', '2019', ''),
 (3, '1', 'Mark Clever', 'Maths', '7', '35', '45', '80', '4th', 'A', 'term1', '2019', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `exp_id` int(11) NOT NULL,
+  `exp_no` varchar(255) NOT NULL,
+  `exp_name` varchar(255) NOT NULL,
+  `exp_type` varchar(255) NOT NULL,
+  `exp_amount` varchar(255) NOT NULL,
+  `exp_status` varchar(255) NOT NULL,
+  `exp_phone` varchar(255) NOT NULL,
+  `exp_email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -268,9 +297,43 @@ CREATE TABLE `teachers` (
   `t_loginDetails` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transport`
+--
+
+CREATE TABLE `transport` (
+  `tr_id` int(11) NOT NULL,
+  `rn_name` varchar(255) NOT NULL,
+  `vn_name` varchar(255) NOT NULL,
+  `dn_name` varchar(255) NOT NULL,
+  `ln_name` varchar(255) NOT NULL,
+  `pn_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uniform`
+--
+
+CREATE TABLE `uniform` (
+  `id` int(11) NOT NULL,
+  `un_type` varchar(255) NOT NULL,
+  `un_size` varchar(255) NOT NULL,
+  `un_gender` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `class`
@@ -302,6 +365,12 @@ ALTER TABLE `class_rouctine`
 --
 ALTER TABLE `exams`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`exp_id`);
 
 --
 -- Indexes for table `fees`
@@ -345,8 +414,26 @@ ALTER TABLE `teachers`
   ADD KEY `t_class` (`t_class`);
 
 --
+-- Indexes for table `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`tr_id`);
+
+--
+-- Indexes for table `uniform`
+--
+ALTER TABLE `uniform`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -371,6 +458,12 @@ ALTER TABLE `class_rouctine`
 --
 ALTER TABLE `exams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `expenses`
+--
+ALTER TABLE `expenses`
+  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `fees`
@@ -407,6 +500,18 @@ ALTER TABLE `subjects`
 --
 ALTER TABLE `teachers`
   MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transport`
+--
+ALTER TABLE `transport`
+  MODIFY `tr_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `uniform`
+--
+ALTER TABLE `uniform`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
